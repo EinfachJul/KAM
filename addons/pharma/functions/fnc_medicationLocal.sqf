@@ -48,13 +48,6 @@ TRACE_1("Running treatmentMedicationLocal with Advanced configuration for",_pati
 
 private _partIndex = ALL_BODY_PARTS find toLower _bodyPart;
 
-// Handle IV blockage
-if (((_patient getVariable [QGVAR(IV), [0,0,0,0,0,0]]) select _partIndex) isEqualTo 3) exitWith {
-    private _occludedMedications = _patient getVariable [QACEGVAR(medical,occludedMedications), []];
-    _occludedMedications pushBack [_partIndex, _classname];
-    _patient setVariable [QACEGVAR(medical,occludedMedications), _occludedMedications, true];
-};
-
 // Handle tourniquet on body part blocking blood flow at injection site
 if (HAS_TOURNIQUET_APPLIED_ON(_patient,_partIndex)) exitWith {
     TRACE_1("unit has tourniquets blocking blood flow on injection site",_tourniquets);
@@ -76,7 +69,6 @@ private _hrIncreaseLow          = GET_ARRAY(_medicationConfig >> "hrIncreaseLow"
 private _hrIncreaseNormal       = GET_ARRAY(_medicationConfig >> "hrIncreaseNormal",getArray (_defaultConfig >> "hrIncreaseNormal"));
 private _hrIncreaseHigh         = GET_ARRAY(_medicationConfig >> "hrIncreaseHigh",getArray (_defaultConfig >> "hrIncreaseHigh"));
 private _incompatibleMedication = GET_ARRAY(_medicationConfig >> "incompatibleMedication",getArray (_defaultConfig >> "incompatibleMedication"));
-private _alphaFactor            = GET_NUMBER(_medicationConfig >> "alphaFactor",getNumber (_defaultConfig >> "alphaFactor"));
 
 private _heartRate = GET_HEART_RATE(_patient);
 private _hrIncrease = [_hrIncreaseLow, _hrIncreaseNormal, _hrIncreaseHigh] select (floor ((0 max _heartRate min 110) / 55));
@@ -89,11 +81,3 @@ TRACE_3("adjustments",_heartRateChange,_painReduce,_viscosityChange);
 
 // Check for medication compatiblity
 [_patient, _className, _maxDose, _incompatibleMedication] call ACEFUNC(medical_treatment,onMedicationUsage);
-
-//Change Alpha Factor
-[_patient, _alphaFactor] call FUNC(alphaAction);
-
-
-if (_className in ["Lorazepam","Fentanyl","Ketamine","EACA","TXA","Atropine","Amiodarone","Flumazenil"]) then {
-    [format ["kat_pharma_%1Local", toLower _className], [_patient, _bodyPart], _patient] call CBA_fnc_targetEvent;
-};

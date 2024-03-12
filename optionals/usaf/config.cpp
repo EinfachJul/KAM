@@ -7,15 +7,10 @@ class CfgPatches {
         units[] = {};
         weapons[] = {};
         magazines[] = {};
-        requiredAddons[] = {
-            "kat_misc",
-            "rhsusf_main"
-        };
+        requiredAddons[] = {};
         author = "Katalam";
         authors[] = {"Katalam"};
         url = ECSTRING(main,URL);
         VERSION_CONFIG;
     };
 };
-
-#include "CfgVehicles.hpp"
