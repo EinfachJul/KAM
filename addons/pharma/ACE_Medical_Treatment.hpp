@@ -8,20 +8,9 @@ class ACE_ADDON(Medical_Treatment) {
             timeInSystem = 30;
             timeTillMaxEffect = 2;
             maxDose = 10;
+            maxDoseDeviation = 2;
             incompatibleMedication[] = {};
             viscosityChange = 0;
-            onOverDose = "";
-        };
-        class Painkillers {
-            painReduce = 0.3;
-            hrIncreaseLow[] = {0, 5};
-            hrIncreaseNormal[] = {5, 10};
-            hrIncreaseHigh[] = {5, 15};
-            timeInSystem = 600;
-            timeTillMaxEffect = 90;
-            maxDose = 10;
-            incompatibleMedication[] = {};
-            viscosityChange = -5;
             onOverDose = "";
         };
     };

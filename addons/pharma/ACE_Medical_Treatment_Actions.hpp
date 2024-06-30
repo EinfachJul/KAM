@@ -1,21 +1,5 @@
 class ACE_Medical_Treatment_Actions {
     class Morphine;
-
-    class Painkillers: Morphine {
-        displayName = CSTRING(Inject_Box_Painkillers);
-        displayNameProgress = CSTRING(Using);
-        allowedSelections[] = {"Head"};
-        items[] = {"kat_Painkiller"};
-        condition = QUOTE(!(_patient getVariable [ARR_2(QUOTE(QUOTE(ACE_isUnconscious)),false)]));
-        callbackSuccess = QFUNC(treatmentAdvanced_Painkillers);
-        icon = QPATHTOF(ui\icon_painkillers_action.paa);
-        animationPatient = "";
-        animationPatientUnconscious = "AinjPpneMstpSnonWrflDnon_rolltoback";
-        animationPatientUnconsciousExcludeOn[] = {"ainjppnemstpsnonwrfldnon"};
-        sounds[] = {{QPATHTO_R(sounds\take_painkillers.wav),5,1,15}};
-        litter[] = {};
-        consumeItem = 0;
-    };
     class Carbonate: Morphine {
         displayName = CSTRING(Take_Carbonate);
         displayNameProgress = CSTRING(Using);

@@ -5,10 +5,8 @@ class CfgPatches {
         name = COMPONENT_NAME;
         requiredVersion = REQUIRED_VERSION;
         units[] = {
-            "kat_PainkillerItem",
         };
         weapons[] = {
-            "kat_Painkiller",
             "kat_Carbonate"
         };
         magazines[] = { };
@@ -38,6 +36,5 @@ class CfgPatches {
 #include "CfgEventHandlers.hpp"
 #include "CfgSounds.hpp"
 #include "CfgWeapons.hpp"
-#include "CfgVehicles.hpp"
 #include "ACE_Medical_Treatment.hpp"
 #include "ACE_Medical_Treatment_Actions.hpp"
